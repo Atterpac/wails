@@ -11,13 +11,10 @@ func (a *linuxApp) showAboutDialog(title string, message string, icon []byte) {
 		SetMessage(message).
 		SetIcon(icon)
 	InvokeAsync(func() {
-		response := runQuestionDialog(pointer(parent), about)
-		if response >= 0 && response < len(about.Buttons) {
-			button := about.Buttons[response]
-			if button.Callback != nil {
-				go button.Callback()
-			}
-		}
+		runQuestionDialog(
+			pointer(parent),
+			about,
+		)
 	})
 }
 
